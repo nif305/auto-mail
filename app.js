@@ -28,10 +28,10 @@ async function saveLetterToGitHub(title, content) {
 
   if (!res.ok) {
     const t = await res.text().catch(() => "");
-    alert("❌ فشل إرسال الحفظ إلى GitHub.\n" + t);
+    alert("فشل إرسال الحفظ إلى GitHub.\n" + t);
     throw new Error("GitHub dispatch failed");
   } else {
-    console.log("✅ تم إرسال الحفظ إلى GitHub.");
+    console.log("تم إرسال الحفظ إلى GitHub.");
   }
 }
 
