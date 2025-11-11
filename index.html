@@ -177,6 +177,14 @@
          </svg> حفظ في الأرشيف </button> <button onclick="toggleEditMode()" id="editToggle" class="bg-nauss-gold hover:bg-yellow-600 text-white px-4 py-2 rounded-lg transition-colors"> تعديل </button>
        </div>
       </div>
+      <!-- زر العودة للصفحة الرئيسية -->
+<div style="text-align:center; margin-top:20px;">
+  <button id="homeBtn"
+          style="background-color:#016564; color:white; padding:10px 25px;
+                 border:none; border-radius:8px; font-size:16px; cursor:pointer;">
+    ↩︎ العودة للصفحة الرئيسية
+  </button>
+</div>
       <div id="letterDisplay" class="bg-nauss-light p-6 rounded-lg mb-6 border-r-4 border-nauss-green"></div>
       <div id="letterEditor" class="hidden mb-6"><textarea id="letterTextEditor" class="w-full p-4 border border-gray-300 rounded-lg focus:border-nauss-green focus:outline-none resize-none" style="direction: rtl; height: 400px;"></textarea>
        <div class="flex gap-3 mt-4"><button onclick="saveEdits()" class="bg-nauss-green hover:bg-nauss-dark text-white px-4 py-2 rounded-lg transition-colors"> حفظ التغييرات </button> <button onclick="cancelEdits()" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors"> إلغاء </button>
@@ -2882,4 +2890,5 @@
         });
     </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99d10fff25d46ae7',t:'MTc2Mjg5ODQyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
 </html>
