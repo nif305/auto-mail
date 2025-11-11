@@ -1,0 +1,40 @@
+
+name: Save Letter (Auto)
+
+on:
+  repository_dispatch:
+    types: [save-letter]
+  workflow_dispatch:
+    inputs:
+      title:
+        description: "Letter title"
+        required: true
+        default: "بدون عنوان"
+      content:
+        description: "Letter HTML content"
+        required: true
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  save:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run save-letter script
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const run = require('./backend/save-letter.js');
+            await run({ github, context, core });
