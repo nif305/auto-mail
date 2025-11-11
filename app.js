@@ -54,39 +54,39 @@ function showEl(el, display = "block") {
   if (el.classList) el.classList.remove("hidden");
   else el.style.display = display;
 }
+function resetLetterUI() {
+  var out  = document.getElementById('letterOutput');
+  var disp = document.getElementById('letterDisplay');
+  var edit = document.getElementById('letterEditor');
 
-window.resetLetterUI = function () {
-  const out = document.getElementById("letterOutput");
-  const disp = document.getElementById("letterDisplay");
-  const edit = document.getElementById("letterEditor");
+  if (disp) disp.innerHTML = '';
+  if (edit) edit.classList.add('hidden');
+  if (out)  out.classList.add('hidden');
 
-  if (disp) disp.innerHTML = "";
-  hideEl(edit);
-  hideEl(out);
+  var cat  = document.getElementById('categorySelection');
+  var type = document.getElementById('letterTypeSection');
+  var form = document.getElementById('letterForm');
 
-  const catSel = document.getElementById("categorySelection");
-  const typeSec = document.getElementById("letterTypeSection");
-  const form = document.getElementById("letterForm");
+  if (cat)  { cat.classList.remove('hidden'); cat.style.display = 'grid'; }
+  if (type) { type.classList.add('hidden'); }
+  if (form) { try { form.reset(); } catch(_) {} form.classList.remove('hidden'); form.style.display = ''; }
 
-  if (catSel) showEl(catSel, "grid");
-  if (typeSec) hideEl(typeSec);
-  if (form) {
-    try { form.reset(); } catch (_) {}
-    form.classList.remove("hidden");
-    form.style.display = "";
-  }
-
-  document.querySelectorAll("input, textarea, select").forEach(el => {
-    const t = (el.type || "").toLowerCase();
-    if (t === "checkbox" || t === "radio") el.checked = false;
-    else if (!["button", "submit", "reset", "file"].includes(t)) el.value = "";
+  Array.prototype.forEach.call(document.querySelectorAll('input,textarea,select'), function (el) {
+    var t = (el.type || '').toLowerCase();
+    if (t === 'checkbox' || t === 'radio') el.checked = false;
+    else if (['button','submit','reset','file'].indexOf(t) === -1) el.value = '';
   });
 
-  const dyn = document.getElementById("dynamicFields");
-  if (dyn) dyn.innerHTML = "";
-  const tbl = document.getElementById("coursesTableBuilder");
-  if (tbl) tbl.innerHTML = "";
-  if (typeof window.courseRowCounter !== "undefined") window.courseRowCounter = 0;
+  var dyn = document.getElementById('dynamicFields');       if (dyn) dyn.innerHTML = '';
+  var tbl = document.getElementById('coursesTableBuilder'); if (tbl) tbl.innerHTML = '';
+  if (typeof window.courseRowCounter !== 'undefined') window.courseRowCounter = 0;
 
-  window.scrollTo({ top: 0, behavior: "smooth" });
-};
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.addEventListener('click', function (e) {
+  if (e.target && e.target.id === 'homeBtn') {
+    e.preventDefault();
+    resetLetterUI();
+  }
+})
