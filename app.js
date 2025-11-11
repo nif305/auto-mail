@@ -41,3 +41,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const exampleContent = "<p>هذه تجربة حفظ تلقائي.</p>";
   saveLetterToGitHub(exampleTitle, exampleContent);
 });
+// ===== زر العودة للصفحة الرئيسية =====
+document.getElementById("homeBtn").addEventListener("click", function () {
+  // إخفاء مخرجات المراسلة
+  document.getElementById("letterOutput").classList.add("hidden");
+
+  // إظهار نموذج الإدخال من جديد
+  const form = document.getElementById("letterForm");
+  if (form) {
+    form.reset(); // يمسح كل الحقول
+    form.classList.remove("hidden");
+  }
+
+  // التمرير لأعلى الصفحة (اختياري)
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
