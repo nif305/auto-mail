@@ -1,11 +1,14 @@
+// app.js — إرسال المراسلات تلقائيًا إلى GitHub Action عبر repository_dispatch
 async function saveLetterToGitHub(title, content) {
-  const repoOwner = "nif305";
-  const repoName = "auto-mail";
+  const repoOwner = "nif305";     // غيّرها إذا احتجت
+  const repoName  = "auto-mail";  // اسم المستودع
   const eventType = "save-letter";
 
+  // ستحتاج Personal Access Token عند التشغيل من المتصفح (GitHub Pages)
+  // أدخل التوكن مرة واحدة وسيحفظه المتصفح محليًا (اختياري)
   let token = localStorage.getItem("gh_pat") || "";
   if (!token) {
-    token = prompt("أدخل GitHub Personal Access Token:");
+    token = prompt("أدخل GitHub Personal Access Token (يُفضَّل Fine-grained بحد أدنى من الصلاحيات):");
     if (token) localStorage.setItem("gh_pat", token);
   }
 
@@ -27,66 +30,17 @@ async function saveLetterToGitHub(title, content) {
   });
 
   if (!res.ok) {
-    const t = await res.text().catch(() => "");
-    alert("فشل إرسال الحفظ إلى GitHub.\n" + t);
-    throw new Error("GitHub dispatch failed");
+    const t = await res.text();
+    alert("❌ فشل إرسال الطلب إلى GitHub. " + t);
   } else {
-    console.log("تم إرسال الحفظ إلى GitHub.");
+    alert("✅ تم حفظ المراسلة تلقائيًا في data/letters/");
   }
 }
 
-window.triggerAutoSave = async function () {
-  const titleEl = document.querySelector("h1, h2, h3");
-  const letterBox = document.getElementById("letterDisplay");
-  const title = (titleEl && titleEl.textContent) || "مراسلة";
-  const content = (letterBox && letterBox.innerHTML) || document.body.innerHTML;
-  await saveLetterToGitHub(title, content);
+// نادِ هذه الدالة مباشرة بعد توليد المراسلة من صفحتك
+// مثال عام (عدّل حسب صفحتك):
+window.triggerAutoSave = () => {
+  const title   = document.querySelector("h1,h2,h3")?.textContent || "مراسلة";
+  const content = document.querySelector("#letterDisplay")?.innerHTML || document.body.innerHTML;
+  saveLetterToGitHub(title, content);
 };
-
-function hideEl(el) {
-  if (!el) return;
-  if (el.classList) el.classList.add("hidden");
-  else el.style.display = "none";
-}
-
-function showEl(el, display = "block") {
-  if (!el) return;
-  if (el.classList) el.classList.remove("hidden");
-  else el.style.display = display;
-}
-function resetLetterUI() {
-  var out  = document.getElementById('letterOutput');
-  var disp = document.getElementById('letterDisplay');
-  var edit = document.getElementById('letterEditor');
-
-  if (disp) disp.innerHTML = '';
-  if (edit) edit.classList.add('hidden');
-  if (out)  out.classList.add('hidden');
-
-  var cat  = document.getElementById('categorySelection');
-  var type = document.getElementById('letterTypeSection');
-  var form = document.getElementById('letterForm');
-
-  if (cat)  { cat.classList.remove('hidden'); cat.style.display = 'grid'; }
-  if (type) { type.classList.add('hidden'); }
-  if (form) { try { form.reset(); } catch(_) {} form.classList.remove('hidden'); form.style.display = ''; }
-
-  Array.prototype.forEach.call(document.querySelectorAll('input,textarea,select'), function (el) {
-    var t = (el.type || '').toLowerCase();
-    if (t === 'checkbox' || t === 'radio') el.checked = false;
-    else if (['button','submit','reset','file'].indexOf(t) === -1) el.value = '';
-  });
-
-  var dyn = document.getElementById('dynamicFields');       if (dyn) dyn.innerHTML = '';
-  var tbl = document.getElementById('coursesTableBuilder'); if (tbl) tbl.innerHTML = '';
-  if (typeof window.courseRowCounter !== 'undefined') window.courseRowCounter = 0;
-
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-document.addEventListener('click', function (e) {
-  if (e.target && e.target.id === 'homeBtn') {
-    e.preventDefault();
-    resetLetterUI();
-  }
-})
