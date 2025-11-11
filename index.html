@@ -170,21 +170,14 @@
     </div><!-- Generated Letter Output -->
     <div id="letterOutput" class="hidden">
      <div class="bg-white rounded-lg shadow-lg p-6">
-<div class="flex gap-3 flex-wrap items-center justify-center">
-  <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors flex items-center" id="saveArchiveBtn">
-    <svg class="w-4 h-4 ml-2" fill="currentColor" viewBox="0 0 24 24"><path d="M3 4h18v16H3z"></path></svg>
-    حفظ في الأرشيف
-  </button>
-
- <button id="homeBtn" class="bg-nauss-green hover:bg-emerald-700 text-white px-4 py-2 rounded-lg transition-colors">
-  ↩︎ العودة للصفحة الرئيسية
-</button>
-
-  <button class="bg-nauss-gold hover:bg-yellow-600 text-white px-4 py-2 rounded-lg transition-colors" id="editToggle">
-    ✏️ تعديل
-  </button>
-</div>
-  <div id="letterDisplay" class="bg-nauss-light p-6 rounded-lg mb-6 border-r-4 border-nauss-green"></div>
+      <div class="flex items-center justify-between mb-6">
+       <h3 class="text-xl font-bold text-nauss-green">المراسلة المُولدة</h3>
+       <div class="flex gap-3"><button onclick="saveToArchive()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors flex items-center">
+         <svg class="w-4 h-4 ml-2" fill="currentColor" viewbox="0 0 24 24"><path d="M3 4h18v2H3V4zm0 7h18v9a2 2 0 01-2 2H5a2 2 0 01-2-2v-9zm2 2v7h14v-7H5zm2 2h10v1H7v-1zm0 2h7v1H7v-1z" />
+         </svg> حفظ في الأرشيف </button> <button onclick="toggleEditMode()" id="editToggle" class="bg-nauss-gold hover:bg-yellow-600 text-white px-4 py-2 rounded-lg transition-colors"> تعديل </button>
+       </div>
+      </div>
+      <div id="letterDisplay" class="bg-nauss-light p-6 rounded-lg mb-6 border-r-4 border-nauss-green"></div>
       <div id="letterEditor" class="hidden mb-6"><textarea id="letterTextEditor" class="w-full p-4 border border-gray-300 rounded-lg focus:border-nauss-green focus:outline-none resize-none" style="direction: rtl; height: 400px;"></textarea>
        <div class="flex gap-3 mt-4"><button onclick="saveEdits()" class="bg-nauss-green hover:bg-nauss-dark text-white px-4 py-2 rounded-lg transition-colors"> حفظ التغييرات </button> <button onclick="cancelEdits()" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors"> إلغاء </button>
        </div>
@@ -2889,10 +2882,4 @@
         });
     </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99d10fff25d46ae7',t:'MTc2Mjg5ODQyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
-
 </html>
-
-
-
-
-
